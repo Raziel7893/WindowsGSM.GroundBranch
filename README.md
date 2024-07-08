@@ -4,6 +4,7 @@
 ## PLEASE ⭐STAR⭐ THE REPO IF YOU LIKE IT! THANKS!
 
 ### Notes
+- The server needs one start to generate some ini files, so the first start could crash, just try again  
 - If IP Connect works but no Server Listing, try setting your public IP inside Edit Config Windows under Server IP
 - If local connections work but not External: see chapter Portforwarding
 
