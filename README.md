@@ -1,5 +1,5 @@
-# WindowsGSM.GroundBranch
-🧩WindowsGSM plugin that provides GroundBranch Dedicated server
+# WindowsGSM.BRINK
+🧩WindowsGSM plugin that provides BRINK Dedicated server
 
 ## PLEASE ⭐STAR⭐ THE REPO IF YOU LIKE IT! THANKS!
 
@@ -14,10 +14,10 @@
 3. Drag WindowsGSM.Exe into previously created folder and execute it.
 
 ### Plugin Installation:
-1. Download [latest](https://https://github.com/Raziel7893/WindowsGSM.GroundBranch/releases/latest) release
-2. Either Extract then Move the folder **GroundBranch.cs** to **WindowsGSM/plugins** 
+1. Download [latest](https://https://github.com/Raziel7893/WindowsGSM.Brink/releases/latest) release
+3. Either Extract then Move the folder **BRINK.cs** to **WindowsGSM/plugins** 
     1. Press on the Puzzle Icon in the left bottom side and press **[RELOAD PLUGINS]** or restart WindowsGSM
-3. Or Press on the Puzzle Icon in the left bottom side and press **[IMPORT PLUGIN]** and choose the downloaded .zip
+4. Or Press on the Puzzle Icon in the left bottom side and press **[IMPORT PLUGIN]** and choose the downloaded .zip
 
 ### Official Documentation
 🗃️ Didn't find any documentation yet. Please Let me know if you came accros one
@@ -34,18 +34,21 @@
 - 27015 UDP - Default QueryPort
 
 ### Files To Backup
-- Save Gane (You could only save serverfiles/GroundBranch/Saved , but that includes many big logs)
-  - WindowsGSM\servers\%ID%\serverfiles/GroundBranch/Saved/SaveGames
-  - WindowsGSM\servers\%ID%\serverfiles/GroundBranch/Saved/Config/WindowsServer
+- Save Gane (You could only save serverfiles/BRINK/Saved , but that includes many big logs)
+  - WindowsGSM\servers\%ID%\serverfiles/Save
 - WindowsGSM Config
   - WindowsGSM\servers\%ID%\configs
 
 ### Available Params
-All these params are automatically set by WGSM
-- -port=  	 	                 can be change and working (Change via WGSM settings)
-- -queryPort=                    can be change and working (Change via WGSM settings)
-- -MultiHome=					 Change via WGSM settings, most games need your local AdapterIP, but if you have issues with serverlisting you may try your online IP
-- -LOCALLOGTIMES -log            creates logfiles in serverId\serverfiles\GroundBranch\Saved\Logs
+All these params are automatically set by WGSM and can be changed via Edit Config Window (don't edit the config Windowsgsm.ini manually
+- +set si_name $ServerName 
+- +set net_ip $ServerIP
+- +set net_serverPort $ServerPort
+- +set net_serverPortMaster $ServerQueryPort
+- +set si_maxPlayers $ServerMaxPlayer
+- +set net_serverDedicated 1 
+- +set fs_savepath ./ 
+
 
 ### Not having an full IPv4 adress ( named CCNAT or DSL Light )
 No game or gameserver supports ipv6 only connections. 
@@ -75,7 +78,7 @@ Many windowsgsm plugin creators recommend zerotier (should be a free VPN designa
 [Paypal](https://paypal.me/raziel7893)
 
 ### License
-This project is licensed under the MIT License - see the <a href="https://github.com/raziel7893/WindowsGSM.GroundBranch/blob/main/LICENSE">LICENSE.md</a> file for details
+This project is licensed under the MIT License - see the <a href="https://github.com/raziel7893/WindowsGSM.BRINK/blob/main/LICENSE">LICENSE.md</a> file for details
 
 ### Thanks
 Thanks to ohmcodes for the Enshrouded and Palworld Plugins which i used for guidance to create this one
