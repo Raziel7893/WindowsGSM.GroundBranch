@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using WindowsGSM.Functions;
@@ -42,22 +42,22 @@ namespace WindowsGSM.Plugins
         // - Game server default values
         public string Port = "7777"; // Default port
 
-        public string Additional = "-LOCALLOGTIMES -log"; // Additional server start parameter
+        public string Additional = " -nohomedir -stdout -FullStdOutLogOutput"; // Additional server start parameter
 
         // TODO: Following options are not supported yet, as ther is no documentation of available options
         public string Maxplayers = "16"; // Default maxplayers        
         public string QueryPort = "27015"; // Default query port. This is the port specified in the Server Manager in the client UI to establish a server connection.
         // TODO: Unsupported option
-        public string Defaultmap = "Dedicated"; // Default map name
+        public string Defaultmap = "747"; // Default map name
         // TODO: Undisclosed method
         public object QueryMethod = new A2S(); // Query method should be use on current server type. Accepted value: null or new A2S() or new FIVEM() or new UT3()
 
 
-    
+
         // - Create a default cfg for the game server after installation
         public async void CreateServerCFG()
         {
-          
+
         }
 
         // - Start server function, return its Process to WindowsGSM
@@ -71,8 +71,16 @@ namespace WindowsGSM.Plugins
             }
 
             //Try gather a password from the gui
+            var sb = new StringBuilder();
+            sb.Append($"{_serverData.ServerMap}");
+            if(string.IsNullOrWhiteSpace(_serverData.ServerParam))
+            {
+                if (_serverData.ServerParam.StartsWith("?"))
+                    sb.Append($"{_serverData.ServerParam}");
+                else
+                    sb.Append($" {_serverData.ServerParam} ");
+            }
 
-            StringBuilder sb = new StringBuilder();
             sb.Append($"MultiHome={_serverData.ServerIP} ");
             sb.Append($"Port={_serverData.ServerPort} ");
             sb.Append($"QueryPort={_serverData.ServerQueryPort} ");
@@ -87,7 +95,7 @@ namespace WindowsGSM.Plugins
                     WorkingDirectory = ServerPath.GetServersServerFiles(_serverData.ServerID),
                     FileName = shipExePath,
                     Arguments = sb.ToString(),
-                    WindowStyle = ProcessWindowStyle.Minimized, 
+                    WindowStyle = ProcessWindowStyle.Minimized,
                     UseShellExecute = false
                 },
                 EnableRaisingEvents = true
@@ -132,7 +140,7 @@ namespace WindowsGSM.Plugins
                 Functions.ServerConsole.SetMainWindow(p.MainWindowHandle);
                 Functions.ServerConsole.SendWaitToMainWindow("^c");
                 p.WaitForExit(2000);
-                if(!p.HasExited)
+                if (!p.HasExited)
                     p.Kill();
             });
         }
