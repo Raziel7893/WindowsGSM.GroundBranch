@@ -28,9 +28,7 @@ namespace WindowsGSM.Plugins
         public override string AppId => "476400"; // Game server appId Steam
 
         // - Standard Constructor and properties
-        public GroundBranch(ServerConfig serverData) : base(serverData) => base.serverData = _serverData = serverData;
-        private readonly ServerConfig _serverData;
-
+        public GroundBranch(ServerConfig serverData) : base(serverData) => base.serverData = serverData;
 
         // - Game server Fixed variables
         //public override string StartPath => "GroundBranchServer.exe"; // Game server start path
@@ -63,7 +61,7 @@ namespace WindowsGSM.Plugins
         // - Start server function, return its Process to WindowsGSM
         public async Task<Process> Start()
         {
-            string shipExePath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, StartPath);
+            string shipExePath = Functions.ServerPath.GetServersServerFiles(serverData.ServerID, StartPath);
             if (!File.Exists(shipExePath))
             {
                 Error = $"{Path.GetFileName(shipExePath)} not found ({shipExePath})";
@@ -73,10 +71,10 @@ namespace WindowsGSM.Plugins
             //Try gather a password from the gui
 
             StringBuilder sb = new StringBuilder();
-            sb.Append($"MultiHome={_serverData.ServerIP} ");
-            sb.Append($"Port={_serverData.ServerPort} ");
-            sb.Append($"QueryPort={_serverData.ServerQueryPort} ");
-            sb.Append($"{_serverData.ServerParam} ");
+            sb.Append($"MultiHome={serverData.ServerIP} ");
+            sb.Append($"Port={serverData.ServerPort} ");
+            sb.Append($"QueryPort={serverData.ServerQueryPort} ");
+            sb.Append($"{serverData.ServerParam} ");
 
             // Prepare Process
             var p = new Process
@@ -84,7 +82,7 @@ namespace WindowsGSM.Plugins
                 StartInfo =
                 {
                     CreateNoWindow = false,
-                    WorkingDirectory = ServerPath.GetServersServerFiles(_serverData.ServerID),
+                    WorkingDirectory = ServerPath.GetServersServerFiles(serverData.ServerID),
                     FileName = shipExePath,
                     Arguments = sb.ToString(),
                     WindowStyle = ProcessWindowStyle.Minimized, 
@@ -94,14 +92,14 @@ namespace WindowsGSM.Plugins
             };
 
             // Set up Redirect Input and Output to WindowsGSM Console if EmbedConsole is on
-            if (_serverData.EmbedConsole)
+            if (serverData.EmbedConsole)
             {
                 p.StartInfo.RedirectStandardInput = true;
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.RedirectStandardError = true;
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 p.StartInfo.CreateNoWindow = true;
-                var serverConsole = new ServerConsole(_serverData.ServerID);
+                var serverConsole = new ServerConsole(serverData.ServerID);
                 p.OutputDataReceived += serverConsole.AddOutput;
                 p.ErrorDataReceived += serverConsole.AddOutput;
             }
@@ -110,7 +108,7 @@ namespace WindowsGSM.Plugins
             try
             {
                 p.Start();
-                if (_serverData.EmbedConsole)
+                if (serverData.EmbedConsole)
                 {
                     p.BeginOutputReadLine();
                     p.BeginErrorReadLine();
