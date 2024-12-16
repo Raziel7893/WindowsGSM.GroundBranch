@@ -70,13 +70,13 @@ namespace WindowsGSM.Plugins
 
             //Try gather a password from the gui
             var sb = new StringBuilder();
-            sb.Append($"{_serverData.ServerMap}");
-            if(string.IsNullOrWhiteSpace(_serverData.ServerParam))
+            sb.Append($"{serverData.ServerMap}");
+            if(string.IsNullOrWhiteSpace(serverData.ServerParam))
             {
-                if (_serverData.ServerParam.StartsWith("?"))
-                    sb.Append($"{_serverData.ServerParam}");
+                if (serverData.ServerParam.StartsWith("?"))
+                    sb.Append($"{serverData.ServerParam}");
                 else
-                    sb.Append($" {_serverData.ServerParam} ");
+                    sb.Append($" {serverData.ServerParam} ");
             }
 
             StringBuilder sb = new StringBuilder();
