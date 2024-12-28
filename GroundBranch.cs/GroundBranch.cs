@@ -79,11 +79,9 @@ namespace WindowsGSM.Plugins
                     sb.Append($" {serverData.ServerParam} ");
             }
 
-            StringBuilder sb = new StringBuilder();
             sb.Append($"MultiHome={serverData.ServerIP} ");
             sb.Append($"Port={serverData.ServerPort} ");
             sb.Append($"QueryPort={serverData.ServerQueryPort} ");
-            sb.Append($"{serverData.ServerParam} ");
 
             // Prepare Process
             var p = new Process
